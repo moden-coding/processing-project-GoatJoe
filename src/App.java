@@ -36,7 +36,7 @@ public class App extends PApplet{
        rect (300, 320, 220, 30);
        rect (400, 350, 20, 200);
        imageMode(CENTER);
-       image(football, 200,200,45,50);
+       image(football, 800,600,45,50);
      if (colorred == true){;
         circlex -= 40;
     }
