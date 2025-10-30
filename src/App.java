@@ -8,22 +8,26 @@ public class App extends PApplet {
     float circley = 530;
     int rectr = 0;
     PImage football;
-    float speed = 1;    
-    float timer = millis();
-        public static void main(String[] args) {
+    float speed = 1;
+    int startTime = 0;
+    int timer = 0;
+
+    public static void main(String[] args) {
         PApplet.main("App");
     }
 
     public void setup() {
         // image
         football = loadImage("pixel art of an Amiel.png");
-    
+        if (millis()/1000 > timer) {
+        timer = timer + 1;
+        }
     }
-    
+
     public void motion() {
         // motion
-        println ("motion");
-          if (left == true) {
+        println("motion");
+        if (left == true) {
             println("circle move left");
             circlex -= speed;
         }
@@ -37,15 +41,15 @@ public class App extends PApplet {
         size(800, 600);
     }
 
-    public void time() {
-        //timer
-        println ("time");
-         text("Time: " + timer + " seconds", 20, 20);
+    // public void time() {
+    // //timer
+    // println ("time");
+    // text("Time: " + timer + " seconds", 20, 20);
 
-    }
+    // }
 
     public void draw() {
-        //image info
+        // image info
         strokeWeight(0);
         imageMode(CENTER);
         image(football, 400, 300, 950, 600);
@@ -64,11 +68,14 @@ public class App extends PApplet {
         rect(390, 350, 20, 200);
         // methods
         motion();
-        time ();
-        if (circlex > 290 && circlex < 490 && circley>60 && circley<320){
+        // more stuff
+        int time_left = max(0, timer - (millis()- startTime));
+        int seconds =(int)(time_left/1000.0);
+        text("Time left: " + seconds + " seconds", 20, 20);
+        if (circlex > 260 && circlex < 460 && circley > 50 && circley < 300) {
             text("You Won!", 200, 200);
         }
-       
+
     }
 
     // if (frameRate % 100 == 0) {
@@ -82,7 +89,7 @@ public class App extends PApplet {
         if (keyCode == UP) {
             up = true;
         }
-         if (keyCode == LEFT) {
+        if (keyCode == LEFT) {
             left = true;
         }
     }
@@ -94,6 +101,12 @@ public class App extends PApplet {
             up = false;
 
         }
+         if (keyCode == UP) {
+            timer = 3000;
+         }
+          if (keyCode == LEFT) {
+            timer = 3000;
+         }
         if (keyCode == LEFT) {
             left = false;
 
