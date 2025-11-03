@@ -1,16 +1,18 @@
 import processing.core.*;
 import processing.core.PShapeSVG.LineOfText;
+import processing.event.KeyEvent;
 
 public class App extends PApplet {
     boolean up = false;
     boolean screen1 = true;
     boolean left = false;
-    float circlex = 700;
-    float circley = 530;
+    int circlex = 700;
+    int circley = 530;
     int rectr = 0;
     PImage football;
-    float speed = 1;
-    int startTime = 20000;
+    float speed = 2;
+    int startTime = 0;
+    boolean b = true;
     int timer = 0;
 
     public static void main(String[] args) {
@@ -25,14 +27,14 @@ public class App extends PApplet {
 
     public void motion() {
         // motion
-        if (screen1 = false) {
+        if (screen1 == false) {
 
             println("motion");
             if (left == true) {
                 println("circle move left");
                 circlex -= speed;
             }
-            if (up == true) {
+            if (up = true) {
                 println("circle move up");
                 circley -= speed;
             }
@@ -53,7 +55,7 @@ public class App extends PApplet {
 
     public void draw() {
 
-        if (screen1 = true) {
+        if (screen1 == true) {
             background(0, 0, 195);
             fill(255, 255, 0);
             textSize(72);
@@ -68,13 +70,25 @@ public class App extends PApplet {
             fill(10, 255, 0);
             textSize(22);
             text("Press Space To Start", 40, 560);
+            fill(0, 5, 0);
+            textSize(18);
+            text("Rules: Get The Ball In The Post In 3 Seconds", 40, 410);
+            fill(0, 5, 0);
+            textSize(18);
+            text("By Moving Both The Left And Up Key Only", 40, 430);
+            fill(0, 5, 0);
+            textSize(18);
+            text("Rules: Get The Ball In The Post In 3 Seconds", 440, 410);
+            fill(0, 5, 0);
+            textSize(18);
+            text("By Moving Both The Left And Up Key Only", 440, 430);
             fill(10, 255, 0);
             textSize(22);
             text("By  Noah  Zadeh", 613, 560);
             fill(10, 255, 0);
             textSize(12);
             text("An  NZ  prodution", 613, 582);
-        } else {
+        } else if (screen1 == false) {
             // image info
             strokeWeight(0);
             imageMode(CENTER);
@@ -94,15 +108,32 @@ public class App extends PApplet {
             rect(390, 350, 20, 200);
             // methods
             motion();
-            // more stuff
+            // time
             int time_left = max(0, timer - (millis() - startTime));
             int seconds = (int) (time_left / 1000.0);
-            text("Time left: " + seconds + " seconds", 20, 20);
-            if (circlex > 260 && circlex < 460 && circley > 50 && circley < 300) {
+            if (circlex > 250 && circlex < 470 && circley > 50 && circley < 300) {
                 text("You Won!", 200, 200);
+                speed = 0;
+            }
+            if (circlex > 250 && circlex < 470 || circley > 0 && circley < 800 && seconds == 0) {
+                speed = 0;
+                background(0, 0, 195);
+                fill(255, 55, 0);
+                textSize(72);
+                text("YOU MISSED!!!", 200, 90);
+                textSize(372);
+                fill(255, 0, 0);
+                text("X", 308, 350);
+                fill(0, 5, 0);
+                textSize(22);
+                text("Press B To Restart", 40, 560);
+                fill(0, 5, 0);
+                textSize(28);
+                text("Are You Tyler Bass Because You Are Wide Right!", 120, 450);
+                textSize(28);
+                text("Pay Atention, You Got This Press B To Restart", 130, 488);
             }
         }
-
     }
 
     // if (frameRate % 100 == 0) {
@@ -112,6 +143,7 @@ public class App extends PApplet {
 
     public void keyPressed() {
         println("pressed up");
+
         // movement when key touched
         if (keyCode == UP) {
             up = true;
@@ -119,9 +151,14 @@ public class App extends PApplet {
         if (keyCode == LEFT) {
             left = true;
         }
-       if (keyPressed = ){
-
-       }
+        if (key == ' ') {
+            println("test");
+            screen1 = false;
+        }
+        if (key == 'b') {
+            screen1 = true;
+            
+        }
     }
 
     public void keyReleased() {
