@@ -4,6 +4,7 @@ import processing.event.KeyEvent;
 
 public class App extends PApplet {
     boolean up = false;
+    boolean Ball = false;
     boolean screen1 = true;
     boolean left = false;
     int circlex = 700;
@@ -11,9 +12,9 @@ public class App extends PApplet {
     int rectr = 0;
     PImage football;
     float speed = 2;
-    int startTime = 600000;
-    boolean b = true;
+    int startTime = 65000;
     int timer = 0;
+    boolean c = false;
 
     public static void main(String[] args) {
         PApplet.main("App");
@@ -21,6 +22,7 @@ public class App extends PApplet {
 
     public void setup() {
         // image
+
         football = loadImage("pixel art of an Amiel.png");
 
     }
@@ -38,6 +40,7 @@ public class App extends PApplet {
                 println("circle move up");
                 circley -= speed;
             }
+
         }
     }
 
@@ -69,7 +72,7 @@ public class App extends PApplet {
             rect(290, 300, 220, 30);
             fill(10, 255, 0);
             textSize(22);
-            text("Press Space To Start", 40, 560);
+            text("Press Space In Less than 1 Sec To Start", 40, 560);
             fill(0, 5, 0);
             textSize(18);
             text("Rules: Get The Ball In The Post In 3 Seconds", 40, 410);
@@ -89,6 +92,11 @@ public class App extends PApplet {
             textSize(12);
             text("An  NZ  prodution", 613, 582);
         } else if (screen1 == false) {
+            // boolean ball
+            if (Ball = true) {
+                text("you win", 200, 200);
+                speed = 0;
+            }
             // image info
             strokeWeight(0);
             imageMode(CENTER);
@@ -110,13 +118,13 @@ public class App extends PApplet {
             motion();
             // time
             int time_left = max(0, timer - (millis() - startTime));
-            int seconds = (int) (time_left / 1000.0);
+            int seconds = (int) (time_left / 20000.0);
             text("you have " + seconds + " left", 10, 10);
-            if (circlex > 250 && circlex < 470 && circley > 50 && circley < 300) {
-                text("You Won!", 200, 200);
-                speed = 0;
+            if (circlex < 250 && circlex > 470 && circley < 50 && circley > 300 && time_left == 0) {
+                Ball = true;
             }
-            if (circlex > 250 && circlex < 470 || circley > 0 && circley < 800 && seconds == 0) {
+
+            if (c = true) {
                 speed = 0;
                 background(0, 0, 195);
                 fill(255, 55, 0);
@@ -133,6 +141,8 @@ public class App extends PApplet {
                 text("Are You Tyler Bass Because You Are Wide Right!", 120, 450);
                 textSize(28);
                 text("Pay Atention, You Got This Press B To Restart", 130, 488);
+                time_left = max(0, timer - (millis() - startTime));
+                seconds = (int) (time_left / 20000.0);
             }
         }
     }
@@ -158,7 +168,7 @@ public class App extends PApplet {
         }
         if (key == 'b') {
             screen1 = true;
-            
+
         }
     }
 
