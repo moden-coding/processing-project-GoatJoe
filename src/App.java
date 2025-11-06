@@ -11,7 +11,7 @@ public class App extends PApplet {
     int rectr = 0;
     PImage football;
     float speed = 2;
-    int startTime = 0;
+    int startTime = 600000;
     boolean b = true;
     int timer = 0;
 
@@ -111,6 +111,7 @@ public class App extends PApplet {
             // time
             int time_left = max(0, timer - (millis() - startTime));
             int seconds = (int) (time_left / 1000.0);
+            text("you have " + seconds + " left", 10, 10);
             if (circlex > 250 && circlex < 470 && circley > 50 && circley < 300) {
                 text("You Won!", 200, 200);
                 speed = 0;
